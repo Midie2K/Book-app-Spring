@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/common.css">
+    <title>Book app Spring</title>
+</head>
+<body>
+<h1>Strona główna</h1>
+<h3>książki</h3>
+<div class="books">
+    <table>
+        <thead>
+            <tr>
+               <td>Title</td><td>Author</td><td>ISBM</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="book : ${books}">
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.isbm}"></td>
+            </tr>
+        </tbody>
+
+
+    </table>
+</div>
+</body>
+</html>
