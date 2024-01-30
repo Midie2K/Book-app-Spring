@@ -1,0 +1,9 @@
+tr{
+    border: black 1px solid;
+}
+td{
+    border: black 1px solid;
+}
+thead>tr>td{
+    font-weight: bold;
+}
