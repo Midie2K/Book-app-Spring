@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/common.css">
+    <title>Book app Spring</title>
+</head>
+<body>
+<div id="logo">
+    <h1>Logowanie</h1>
+</div>
+<div th:replace="~{/fragments.html :: menu}"></div>
+<div id="content">
+    <form method="post">
+        <input type="text" placeholder="login" th:field="*{user.login}">
+        <input type="password" placeholder="haslo" th:field="*{user.password}">
+        <input type="submit" value="Zaloguj">
+    </form>
+    <p th:if="${logged != null and !logged}" class="errorMessage">Zły Login lub hasło!!</p>
+    <a href="/register" class="button">Rejestracja</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="menu" th:fragment="menu">
+    <a href="/index" class="button">Strona Główna</a>
+    <a href="/search" class="button">Wyszukaj Książki</a>
+    <a href="/history" class="button" th:if="${isLogged}">Historia Wyporzyczeń</a>
+    <a href="/addBook" class="button" th:if="${user != null and
+                                                user.role != null and
+                                                user.role.name() == 'ADMIN'}">Dodaj książkę</a>
+    <a href="/login" class="button" th:if="${!isLogged}">Login</a>
+    <a href="/logout" class="button" th:if="${isLogged}">Wyloguj</a>
+</div>
+</body>
+</html>

@@ -7,3 +7,6 @@ td{
 thead>tr>td{
     font-weight: bold;
 }
+.errorMessage{
+    color:red;
+}
