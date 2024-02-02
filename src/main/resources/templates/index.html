@@ -11,23 +11,7 @@
 </div>
 <div th:replace="~{/fragments.html :: menu}"></div>
 <div id="content">
-    <h3>książki</h3>
-    <div class="books">
-        <table>
-            <thead>
-            <tr>
-                <td>Title</td><td>Author</td><td>ISBM</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="book : ${books}">
-                <td th:text="${book.title}"></td>
-                <td th:text="${book.author}"></td>
-                <td th:text="${book.isbm}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    <div th:replace="~{/fragments.html :: books}"></div>
 </div>
 
 </body>

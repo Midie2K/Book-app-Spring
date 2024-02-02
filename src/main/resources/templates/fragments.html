@@ -15,5 +15,25 @@
     <a href="/login" class="button" th:if="${!isLogged}">Login</a>
     <a href="/logout" class="button" th:if="${isLogged}">Wyloguj</a>
 </div>
+<div id="books" th:fragment="books">
+    <div class="books">
+        <h3>książki</h3>
+        <table>
+            <thead>
+            <tr>
+                <td>Title</td><td>Author</td><td>ISBM</td><td th:if="${isLogged}">Rent</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${books}" class="book">
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.isbm}"></td>
+                <td th:if="${isLogged}"><a th:href="@{/rent/{bookId}(bookId=${book.id})}" class="button">Rezerwuj</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

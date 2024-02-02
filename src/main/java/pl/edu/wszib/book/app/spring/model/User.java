@@ -1,5 +1,6 @@
 package pl.edu.wszib.book.app.spring.model;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -8,10 +9,14 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
+@Entity(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String login;
     private String password;
+    @Enumerated(EnumType.STRING)
     private Roles role;
     private String name;
     private String surname;

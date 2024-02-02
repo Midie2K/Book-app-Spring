@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.edu.wszib.book.app.spring.dao.IBookDAO;
+import pl.edu.wszib.book.app.spring.services.IBookService;
 import pl.edu.wszib.book.app.spring.session.SessionObj;
 
 import java.util.List;
@@ -13,13 +14,13 @@ import java.util.List;
 @Controller
 public class CommonController {
     @Autowired
-    IBookDAO bookDAO;
+    IBookService bookService;
     @Resource
     SessionObj sessionObj;
 
     @RequestMapping(path = {"/","/main","/index"}, method = RequestMethod.GET)
     public String main(Model model){
-        model.addAttribute("books", bookDAO.getAll());
+        model.addAttribute("books", this.bookService.getAll());
         model.addAttribute("isLogged",
                 this.sessionObj.isLogged());
         return "index";

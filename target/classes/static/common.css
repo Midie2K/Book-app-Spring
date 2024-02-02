@@ -10,3 +10,21 @@ thead>tr>td{
 .errorMessage{
     color:red;
 }
+.button {
+    font-size: 20px;
+    margin: 5px 25px;
+    text-decoration: none;
+    color: black;
+    border: 2px solid black;
+    padding: 5px 10px;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: border, color, background-color 0.5s;
+}
+
+.button:hover {
+    border: 2px solid darkslategrey;
+    color: white;
+    background-color: darkslategrey;
+}

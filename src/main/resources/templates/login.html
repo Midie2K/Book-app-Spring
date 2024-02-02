@@ -14,7 +14,7 @@
     <form method="post">
         <input type="text" placeholder="login" th:field="*{user.login}">
         <input type="password" placeholder="haslo" th:field="*{user.password}">
-        <input type="submit" value="Zaloguj">
+        <input type="submit" class="button" value="Zaloguj">
     </form>
     <p th:if="${logged != null and !logged}" class="errorMessage">Zły Login lub hasło!!</p>
     <a href="/register" class="button">Rejestracja</a>
