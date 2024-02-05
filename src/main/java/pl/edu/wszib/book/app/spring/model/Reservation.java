@@ -1,15 +1,13 @@
 package pl.edu.wszib.book.app.spring.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "reservations")
@@ -19,7 +17,7 @@ public class Reservation {
     private int id;
     @ManyToOne
     private User user;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Book book;
     private LocalDate dateOfRent;
     private LocalDate endOfRent;

@@ -1,15 +1,18 @@
-tr{
-    border: black 1px solid;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
-td{
-    border: black 1px solid;
+
+#logo, #menu, #content {
+    text-align: center;
+    margin: 20px;
 }
-thead>tr>td{
-    font-weight: bold;
+
+h1 {
+    font-size: 36px;
 }
-.errorMessage{
-    color:red;
-}
+
 .button {
     font-size: 20px;
     margin: 5px 25px;
@@ -27,4 +30,36 @@ thead>tr>td{
     border: 2px solid darkslategrey;
     color: white;
     background-color: darkslategrey;
+}
+
+.books {
+    text-align: left;
+    margin: auto;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+.errorMessage{
+    color:red;
 }

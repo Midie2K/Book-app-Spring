@@ -1,6 +1,5 @@
 package pl.edu.wszib.book.app.spring.dao.impl.memory;
 
-import org.springframework.stereotype.Repository;
 import pl.edu.wszib.book.app.spring.dao.IBookDAO;
 import pl.edu.wszib.book.app.spring.model.Book;
 
@@ -48,5 +47,10 @@ public class BookRepository implements IBookDAO {
                 .filter(book -> book.getAuthor().toLowerCase().contains(pattern.toLowerCase()) ||
                         book.getTitle().toLowerCase().contains(pattern.toLowerCase()))
                 .toList();
+    }
+
+    @Override
+    public void persist(Book book) {
+
     }
 }

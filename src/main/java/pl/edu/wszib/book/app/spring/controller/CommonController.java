@@ -5,11 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import pl.edu.wszib.book.app.spring.dao.IBookDAO;
 import pl.edu.wszib.book.app.spring.services.IBookService;
 import pl.edu.wszib.book.app.spring.session.SessionObj;
 
-import java.util.List;
 
 @Controller
 public class CommonController {

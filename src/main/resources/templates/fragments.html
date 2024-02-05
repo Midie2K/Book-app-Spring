@@ -29,7 +29,7 @@
                 <td th:text="${book.title}"></td>
                 <td th:text="${book.author}"></td>
                 <td th:text="${book.isbm}"></td>
-                <td th:if="${isLogged}"><a th:href="@{/rent/{bookId}(bookId=${book.id})}" class="button">Rezerwuj</a></td>
+                <td th:if="${isLogged}"><a  th:if="${book.available}" th:href="@{/rent/{bookId}(bookId=${book.id})}" class="button">Rezerwuj</a></td>
             </tr>
             </tbody>
         </table>

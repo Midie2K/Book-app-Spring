@@ -8,6 +8,6 @@ import java.util.List;
 public interface IReservationDAO {
     List<Reservation> GetAllByID(int id);
     List<Reservation> GetAll();
-    void NewReservation(int bookId);
+    void persist(Reservation reservation);
     void BookReturning(int reservationId);
 }

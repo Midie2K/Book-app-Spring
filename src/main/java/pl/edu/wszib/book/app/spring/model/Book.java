@@ -22,4 +22,13 @@ public class Book {
     private String isbm;
     private boolean available;
 
+    public Book(String title, String author, String isbm, boolean available){
+        this.title = title;
+        this.author = author;
+        this.isbm = isbm;
+        this.available = available;
+    }
+    public Book(int id){
+        this.id = id;
+    }
 }
