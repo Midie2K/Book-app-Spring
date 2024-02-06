@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @Entity(name = "reservations")
 public class Reservation {
     @Id
@@ -22,4 +23,8 @@ public class Reservation {
     private LocalDate dateOfRent;
     private LocalDate endOfRent;
     private LocalDate dateOfReturn;
+
+    public Reservation(int id){
+        this.id = id;
+    }
 }

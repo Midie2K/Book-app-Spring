@@ -22,7 +22,7 @@ public class UserDAO implements IUserDAO {
     SessionFactory sessionFactory;
 
     @Override
-    public Optional<User> GetById(int id) {
+    public Optional<User> getById(int id) {
         Session session = this.sessionFactory.openSession();
         Query<User> query = session.createQuery(GET_BY_ID,User.class);
         query.setParameter("id", id);
@@ -36,7 +36,7 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public Optional<User> GetByLogin(String login) {
+    public Optional<User> getByLogin(String login) {
         Session session = this.sessionFactory.openSession();
         Query<User> query = session.createQuery(GET_BY_LOGIN,User.class);
         query.setParameter("login", login);

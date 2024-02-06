@@ -3,11 +3,14 @@ package pl.edu.wszib.book.app.spring.dao;
 import pl.edu.wszib.book.app.spring.model.Reservation;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface IReservationDAO {
-    List<Reservation> GetAllByID(int id);
-    List<Reservation> GetAll();
+    Optional<Reservation> getById(int id);
+    List<Reservation> getAllByID(int id);
+    List<Reservation> getAll();
+    List<Reservation> getAllRented();
     void persist(Reservation reservation);
-    void BookReturning(int reservationId);
+    void BookReturning(Reservation reservation);
 }

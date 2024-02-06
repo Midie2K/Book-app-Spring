@@ -21,7 +21,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void InitInDB() {
+    public void initInDB() {
         List<User> users = new ArrayList<>();
         users.add(new User("admin", DigestUtils.md5Hex("admin123"), Roles.ADMIN, "admin", "adminowski"));
         users.add(new User("user", DigestUtils.md5Hex("user123"), Roles.USER, "Janusz", "Kowalski"));

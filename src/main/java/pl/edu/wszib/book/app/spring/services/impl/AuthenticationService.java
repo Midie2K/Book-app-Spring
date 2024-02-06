@@ -19,7 +19,7 @@ public class AuthenticationService implements IAuthenticationService {
     SessionObj sessionObj;
     @Override
     public void login(String login, String passwd) {
-        Optional<User> userFromDB = this.userDAO.GetByLogin(login);
+        Optional<User> userFromDB = this.userDAO.getByLogin(login);
         if(userFromDB.isPresent() &&
                 userFromDB.get().getPassword().equals(DigestUtils.md5Hex(passwd))) {
             this.sessionObj.setLoggedUser(userFromDB.get());

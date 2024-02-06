@@ -38,7 +38,6 @@ public class AuthenticationController {
             return "redirect:/main";
         }
         else{
-            //model.addAttribute("user", new User());
             model.addAttribute("logged",false);
             return "login";
         }

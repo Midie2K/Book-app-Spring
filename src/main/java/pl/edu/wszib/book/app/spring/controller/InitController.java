@@ -16,12 +16,12 @@ public class InitController {
 
     @RequestMapping(path = "/init/book", method = RequestMethod.GET)
     private String BookInit(){
-        this.bookService.InitInDB();
+        this.bookService.initInDB();
         return "redirect:/main";
     }
     @RequestMapping(path = "/init/user", method = RequestMethod.GET)
     private String UserInit(){
-        this.userService.InitInDB();
+        this.userService.initInDB();
         return "redirect:/main";
     }
 }

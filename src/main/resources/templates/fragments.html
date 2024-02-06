@@ -9,26 +9,34 @@
     <a href="/index" class="button">Strona Główna</a>
     <a href="/search" class="button">Wyszukaj Książki</a>
     <a href="/history" class="button" th:if="${isLogged}">Historia Wyporzyczeń</a>
-    <a href="/addBook" class="button" th:if="${user != null and
-                                                user.role != null and
-                                                user.role.name() == 'ADMIN'}">Dodaj książkę</a>
+    <a href="/addBook" class="button" th:if="${isAdmin}">Dodaj książkę</a>
     <a href="/login" class="button" th:if="${!isLogged}">Login</a>
     <a href="/logout" class="button" th:if="${isLogged}">Wyloguj</a>
 </div>
 <div id="books" th:fragment="books">
     <div class="books">
-        <h3>książki</h3>
+            <h3>KSIĄŻKI</h3>
         <table>
             <thead>
             <tr>
-                <td>Title</td><td>Author</td><td>ISBM</td><td th:if="${isLogged}">Rent</td>
+                <td>Tytył</td><td>Autor</td><td>ISBM</td><td>Data Wynajmu</td><td>Przewidywana data zwrotu</td>><td th:if="${isLogged}">Wypożycz</td>
             </tr>
             </thead>
             <tbody>
             <tr th:each="book : ${books}" class="book">
-                <td th:text="${book.title}"></td>
+                <td th:text="${book.title}" class="title"></td>
                 <td th:text="${book.author}"></td>
                 <td th:text="${book.isbm}"></td>
+                <td>
+                    <p th:each="reservation : ${rented}"
+                       th:if="${reservation.book.id == book.id}"
+                       th:text="${reservation.dateOfRent}"></p>
+                </td>
+                <td>
+                    <p th:each="reservation : ${rented}"
+                       th:if="${reservation.book.id == book.id}"
+                       th:text="${reservation.endOfRent}"></p>
+                </td>
                 <td th:if="${isLogged}"><a  th:if="${book.available}" th:href="@{/rent/{bookId}(bookId=${book.id})}" class="button">Rezerwuj</a></td>
             </tr>
             </tbody>

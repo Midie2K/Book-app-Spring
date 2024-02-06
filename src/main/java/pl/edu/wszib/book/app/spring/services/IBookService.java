@@ -8,7 +8,8 @@ import java.util.Optional;
 public interface IBookService {
     Optional<Book> getById(int id);
     List<Book> getAll();
+    List<Book> getByPattern(String pattern);
     void persist(Book book);
-    void InitInDB();
-    void update(int bookId);
+    void initInDB();
+    void update(Book book);
 }

@@ -26,12 +26,17 @@ public class BookService implements IBookService {
     }
 
     @Override
+    public List<Book> getByPattern(String pattern) {
+        return bookDAO.getByPattern(pattern);
+    }
+
+    @Override
     public void persist(Book book) {
         this.bookDAO.persist(book);
     }
 
     @Override
-    public void InitInDB() {
+    public void initInDB() {
         List<Book> books = new ArrayList<>();
         books.add(new Book("Java: The Complete Reference, Twelfth Edition",
                 "Herbert Schildt","978-83-832-2156-4",true));
@@ -48,7 +53,7 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public void update(int bookId) {
-        //TODO
+    public void update(Book book) {
+        bookDAO.update(book);
     }
 }

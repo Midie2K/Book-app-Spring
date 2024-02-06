@@ -19,12 +19,12 @@ public class UserRepository implements IUserDAO {
     }
 
     @Override
-    public Optional<User> GetById(final int id) {
+    public Optional<User> getById(final int id) {
         return users.stream().filter(user -> user.getId() == id).findFirst();
     }
 
     @Override
-    public Optional<User> GetByLogin(final String login) {
+    public Optional<User> getByLogin(final String login) {
         return users.stream().filter(user -> user.getLogin().equals(login)).findFirst();
     }
 

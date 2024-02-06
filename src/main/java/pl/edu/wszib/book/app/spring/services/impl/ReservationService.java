@@ -11,6 +11,9 @@ import pl.edu.wszib.book.app.spring.services.IReservationService;
 import pl.edu.wszib.book.app.spring.session.SessionObj;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService implements IReservationService {
@@ -28,7 +31,33 @@ public class ReservationService implements IReservationService {
         reservation.setBook(book);
         reservation.setUser(this.sessionObj.getLoggedUser());
         reservation.setDateOfRent(LocalDate.now());
-        reservation.setDateOfReturn(LocalDate.now().plusWeeks(2));
+        reservation.setEndOfRent(LocalDate.now().plusWeeks(2));
         reservationDAO.persist(reservation);
     }
+
+    @Override
+    public List<Reservation> getAllByID(int id) {
+        return this.reservationDAO.getAllByID(id);
+    }
+
+    @Override
+    public List<Reservation> getAll() {
+        return this.reservationDAO.getAll();
+    }
+
+    @Override
+    public List<Reservation> getAllRented() {
+        return this.reservationDAO.getAllRented();
+    }
+
+    @Override
+    public void bookReturning(int reservationId) {
+        Reservation reservation = reservationDAO.getById(reservationId).get();
+        Book book = reservation.getBook();
+        reservation.setDateOfReturn(LocalDate.now());
+        book.setAvailable(true);
+        reservationDAO.BookReturning(reservation);
+        bookService.update(book);
+    }
+
 }

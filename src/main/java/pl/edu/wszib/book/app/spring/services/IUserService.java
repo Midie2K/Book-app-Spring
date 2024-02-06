@@ -4,5 +4,5 @@ import pl.edu.wszib.book.app.spring.model.User;
 
 public interface IUserService {
     void persist(User user);
-    void InitInDB();
+    void initInDB();
 }

@@ -20,5 +20,13 @@ public class SessionObj {
     public boolean isLogged(){
         return loggedUser != null;
     }
+    public boolean isAdmin(){
+        if (isLogged()){
+            if(loggedUser.getRole().name().equals("ADMIN")){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

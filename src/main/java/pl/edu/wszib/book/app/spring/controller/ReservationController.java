@@ -9,7 +9,7 @@ import pl.edu.wszib.book.app.spring.services.IReservationService;
 
 
 @Controller 
-public class RentingController {
+public class ReservationController {
     @Autowired
     IReservationService reservationService;
 
@@ -17,6 +17,11 @@ public class RentingController {
     private String renting(@PathVariable final int bookId){
         reservationService.persist(bookId);
         return "redirect:/main";
+    }
+    @RequestMapping(path = "/return/{bookId}", method = RequestMethod.GET)
+    private String returning(@PathVariable final int reservationId){
+        reservationService.bookReturning(reservationId);
+        return "redirect:/history";
     }
     
 }

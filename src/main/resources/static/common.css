@@ -32,9 +32,18 @@ h1 {
     background-color: darkslategrey;
 }
 
-.books {
+.books .title {
+    width: 40%;
+    max-width: 40%;
+    text-align: center;
+}
+
+.books td {
     text-align: left;
-    margin: auto;
+}
+
+.books p {
+    margin: 0;
 }
 
 h3 {
@@ -62,4 +71,7 @@ th {
 }
 .errorMessage{
     color:red;
+}
+.title{
+    width: 33%;
 }
