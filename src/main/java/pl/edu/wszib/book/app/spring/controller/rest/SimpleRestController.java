@@ -1,6 +1,8 @@
 package pl.edu.wszib.book.app.spring.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,14 +16,14 @@ public class SimpleRestController {
     @Autowired
     IUserService userService;
 
-    @RequestMapping(path = "/init/book", method = RequestMethod.GET)
-    private String BookInit(){
+    @RequestMapping(path = "/book/init", method = RequestMethod.PUT)
+    public ResponseEntity<Object> bookInit() {
         this.bookService.initInDB();
-        return "redirect:/main";
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
-    @RequestMapping(path = "/init/user", method = RequestMethod.GET)
-    private String UserInit(){
+    @RequestMapping(path = "/user/init", method = RequestMethod.PUT)
+    public ResponseEntity<Object> userInit() {
         this.userService.initInDB();
-        return "redirect:/main";
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

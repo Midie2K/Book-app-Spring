@@ -20,7 +20,7 @@
         <table>
             <thead>
             <tr>
-                <td>Tytył</td><td>Autor</td><td>ISBM</td><td>Data Wynajmu</td><td>Przewidywana data zwrotu</td><td th:if="${isLogged}">Wypożycz</td>
+                <td>Tytył</td><td>Autor</td><td>ISBM</td><td>Data Wynajmu</td><td>Przewidywana data zwrotu</td><td th:if="${isLogged and !isAdmin}">Wypożycz</td>
             </tr>
             </thead>
             <tbody>
@@ -38,7 +38,7 @@
                        th:if="${reservation.book.id == book.id and reservation.dateOfReturn == null}"
                        th:text="${reservation.endOfRent}"></p>
                 </td>
-                <td th:if="${isLogged}"><a  th:if="${book.available}" th:href="@{/rent/{bookId}(bookId=${book.id})}" class="button">Rezerwuj</a></td>
+                <td th:if="${isLogged and !isAdmin}"><a  th:if="${book.available}" th:href="@{/rent/{bookId}(bookId=${book.id})}" class="button">Rezerwuj</a></td>
             </tr>
             </tbody>
         </table>
