@@ -1,14 +1,14 @@
-package pl.edu.wszib.book.app.spring.controller;
+package pl.edu.wszib.book.app.spring.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import pl.edu.wszib.book.app.spring.services.IBookService;
 import pl.edu.wszib.book.app.spring.services.IUserService;
 
-@Controller
-public class InitController {
+@RestController
+public class SimpleRestController {
     @Autowired
     IBookService bookService;
     @Autowired
