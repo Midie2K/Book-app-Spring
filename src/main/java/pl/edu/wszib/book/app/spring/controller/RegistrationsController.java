@@ -8,43 +8,37 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.edu.wszib.book.app.spring.model.User;
-import pl.edu.wszib.book.app.spring.services.IAuthenticationService;
+import pl.edu.wszib.book.app.spring.services.IUserService;
 import pl.edu.wszib.book.app.spring.session.SessionObj;
 
 
 @Controller
-public class AuthenticationController {
+public class RegistrationsController {
     @Autowired
-    IAuthenticationService authenticationService;
+    IUserService userService;
     @Resource
     SessionObj sessionObj;
 
-    @RequestMapping(path = "/login", method = RequestMethod.GET)
+    @RequestMapping(path = "/register", method = RequestMethod.GET)
     public String login(Model model){
         model.addAttribute("user", new User());
         model.addAttribute("isLogged",
                 this.sessionObj.isLogged());
-        return "login";
+        return "register";
     }
-    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    @RequestMapping(path = "/register", method = RequestMethod.POST)
     public String login(@ModelAttribute User user, Model model){
         model.addAttribute("isLogged",
-                            sessionObj.isLogged());
-
-        this.authenticationService.login(user.getLogin(),user.getPassword());
-
-        if(this.sessionObj.isLogged()){
-            model.addAttribute("logged", true);
-            return "redirect:/main";
+                this.sessionObj.isLogged());
+        if(this.userService.userExist(user.getLogin())){
+            model.addAttribute("exist", true);
+            return "register";
         }
         else{
-            model.addAttribute("logged",false);
-            return "login";
+            model.addAttribute("exist",false);
+            userService.persist(user);
+            return "redirect:/login";
         }
-    }
-    @RequestMapping(path = "/logout", method = RequestMethod.GET)
-    public String logout(){
-        this.authenticationService.logout();
-        return "redirect:/main";
+
     }
 }

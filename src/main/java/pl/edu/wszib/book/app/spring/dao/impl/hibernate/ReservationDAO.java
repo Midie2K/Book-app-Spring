@@ -10,6 +10,7 @@ import pl.edu.wszib.book.app.spring.dao.IReservationDAO;
 
 import pl.edu.wszib.book.app.spring.model.Reservation;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +20,9 @@ public class ReservationDAO implements IReservationDAO {
     private final String GET_ALL ="FROM pl.edu.wszib.book.app.spring.model.Reservation";
     private final String GET_ALL_RENTED ="FROM pl.edu.wszib.book.app.spring.model.Reservation WHERE dateOfReturn IS NULL";
     private final String GET_ALL_BY_USER_ID ="FROM pl.edu.wszib.book.app.spring.model.Reservation WHERE user.id = :user_id";
-
+    private final String GET_ALL_OVERDUE = "FROM pl.edu.wszib.book.app.spring.model.Reservation " +
+            "WHERE (dateOfReturn IS NULL AND DATEDIFF(endOfRent,current_date ) <= -1) " +
+            "OR (dateOfReturn IS NOT NULL AND DATEDIFF(endOfRent, dateOfReturn ) <= -1)";
     @Autowired
     SessionFactory sessionFactory;
 
@@ -66,6 +69,15 @@ public class ReservationDAO implements IReservationDAO {
     }
 
     @Override
+    public List<Reservation> getAllOverdue() {
+        Session session = this.sessionFactory.openSession();
+        Query<Reservation> query = session.createQuery(GET_ALL_OVERDUE,Reservation.class);
+        List<Reservation> result = query.getResultList();
+        session.close();
+        return result;
+    }
+
+    @Override
     public void persist(Reservation reservation) {
         Session session = this.sessionFactory.openSession();
         reservation.setBook(session.merge(reservation.getBook()));
@@ -82,6 +94,15 @@ public class ReservationDAO implements IReservationDAO {
 
     @Override
     public void BookReturning(Reservation reservation) {
-
+        Session session = this.sessionFactory.openSession();
+        try {
+            session.beginTransaction();
+            session.merge(reservation);
+            session.getTransaction().commit();
+        }catch (Exception e){
+            session.getTransaction().rollback();
+        }finally {
+            session.close();
+        }
     }
 }

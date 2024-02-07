@@ -11,5 +11,6 @@ public interface IReservationService {
     List<Reservation> getAllByID(int id);
     List<Reservation> getAll();
     List<Reservation> getAllRented();
+    List<Reservation> getAllOverdue();
     void bookReturning(int reservationId);
 }

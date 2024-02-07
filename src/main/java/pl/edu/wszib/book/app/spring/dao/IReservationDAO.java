@@ -11,6 +11,7 @@ public interface IReservationDAO {
     List<Reservation> getAllByID(int id);
     List<Reservation> getAll();
     List<Reservation> getAllRented();
+    List<Reservation> getAllOverdue();
     void persist(Reservation reservation);
     void BookReturning(Reservation reservation);
 }

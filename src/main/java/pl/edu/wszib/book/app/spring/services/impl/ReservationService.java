@@ -12,8 +12,6 @@ import pl.edu.wszib.book.app.spring.session.SessionObj;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class ReservationService implements IReservationService {
@@ -51,13 +49,18 @@ public class ReservationService implements IReservationService {
     }
 
     @Override
+    public List<Reservation> getAllOverdue() {
+        return this.reservationDAO.getAllOverdue();
+    }
+
+    @Override
     public void bookReturning(int reservationId) {
-        Reservation reservation = reservationDAO.getById(reservationId).get();
+        Reservation reservation = this.reservationDAO.getById(reservationId).get();
         Book book = reservation.getBook();
         reservation.setDateOfReturn(LocalDate.now());
         book.setAvailable(true);
-        reservationDAO.BookReturning(reservation);
-        bookService.update(book);
+        this.reservationDAO.BookReturning(reservation);
+        this.bookService.update(book);
     }
 
 }

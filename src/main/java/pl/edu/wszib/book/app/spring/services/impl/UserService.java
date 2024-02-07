@@ -17,7 +17,19 @@ public class UserService implements IUserService {
     IUserDAO userDAO;
     @Override
     public void persist(User user) {
+        if(user.getRole() == null){
+            user.setRole(Roles.USER);
+        }
+        user.setPassword(DigestUtils.md5Hex(user.getPassword()));
         this.userDAO.persist(user);
+    }
+
+    @Override
+    public boolean userExist(String login) {
+        if(userDAO.getByLogin(login).isPresent()){
+            return true;
+        }
+        return false;
     }
 
     @Override

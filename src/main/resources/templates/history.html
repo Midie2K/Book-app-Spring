@@ -7,11 +7,15 @@
 </head>
 <body>
 <div id="logo">
-    <h1>Strona główna</h1>
+    <h1>Historia wypożyczeń</h1>
 </div>
 <div th:replace="~{/fragments.html :: menu}"></div>
-<div id="content">
-    <div th:replace="~{/fragments.html :: books}"></div>
+<div id="content" th:if="${isAdmin}">
+    <div th:replace="~{/fragments.html :: historyAdmin}"></div>
 </div>
+<div id="content" th:if="${!isAdmin}">
+    <div th:replace="~{/fragments.html :: history}"></div>
+</div>
+
 </body>
 </html>
