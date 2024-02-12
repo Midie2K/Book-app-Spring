@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/common.css">
+    <title>Book app Spring</title>
+</head>
+<body>
+<div id="menu" th:fragment="menu">
+    <a href="/index" class="button">Strona Główna</a>
+    <a href="/search" class="button">Wyszukaj Książki</a>
+    <a href="/history" class="button" th:if="${isLogged}">Historia Wyporzyczeń</a>
+    <a href="/addBook" class="button" th:if="${isAdmin}">Dodaj książkę</a>
+    <a href="/login" class="button" th:if="${!isLogged}">Login</a>
+    <a href="/logout" class="button" th:if="${isLogged}">Wyloguj</a>
+</div>
+<div id="books" th:fragment="books">
+    <div class="books">
+        <h3>KSIĄŻKI</h3>
+        <table>
+            <thead>
+            <tr>
+                <td>Tytył</td><td>Autor</td><td>ISBM</td><td>Data Wynajmu</td><td>Przewidywana data zwrotu</td><td th:if="${isLogged and !isAdmin}">Wypożycz</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${books}" class="book">
+                <td th:text="${book.title}" class="title"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.isbm}"></td>
+                <td>
+                    <p th:each="reservation : ${rented}"
+                       th:if="${reservation.book.id == book.id and reservation.dateOfReturn == null}"
+                       th:text="${reservation.dateOfRent}"></p>
+                </td>
+                <td>
+                    <p th:each="reservation : ${rented}"
+                       th:if="${reservation.book.id == book.id and reservation.dateOfReturn == null}"
+                       th:text="${reservation.endOfRent}"></p>
+                </td>
+                <td th:if="${isLogged and !isAdmin}"><a  th:if="${book.available}" th:href="@{/rent/{bookId}(bookId=${book.id})}" class="button">Rezerwuj</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="books" th:fragment="history">
+    <div class="books">
+        <h3>KSIĄŻKI</h3>
+        <table>
+            <thead>
+            <tr>
+                <td>Tytył</td><td>Autor</td><td>ISBM</td><td>Data Wynajmu</td><td>Koniec wynajmu</td><td>Data oddania</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="record : ${history}" class="book">
+                <td th:text="${record.book.title}" class="title"></td>
+                <td th:text="${record.book.author}"></td>
+                <td th:text="${record.book.isbm}"></td>
+                <td th:text="${record.dateOfRent}"></td>
+                <td th:text="${record.endOfRent}"></td>
+                <td th:if="${record.dateOfReturn != null}"><a th:text="${record.dateOfReturn}"></a></td>
+                <td th:if="${record.dateOfReturn == null}"><a th:href="@{/return/{reservationId}(reservationId=${record.id})}" class="button">Zwróć</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="books" th:fragment="historyAdmin">
+    <div class="books">
+        <h3>KSIĄŻKI</h3>
+        <div id = "submenu">
+            <a href="/history" class="button">Cała historia</a>
+            <a href="/history/overdue" class="button">Przetrzymane książki</a>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <td>Tytył</td><td>Autor</td><td>ISBM</td><td>Data Wynajmu</td><td>Koniec wynajmu</td><td>Data oddania</td><td>Imię</td><td>Nazwisko</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="record : ${history}" class="book">
+                <td th:text="${record.book.title}" class="title"></td>
+                <td th:text="${record.book.author}"></td>
+                <td th:text="${record.book.isbm}"></td>
+                <td th:text="${record.dateOfRent}"></td>
+                <td th:text="${record.endOfRent}"></td>
+                <td th:text="${record.dateOfReturn != null ? record.dateOfReturn : ' '}"></td>
+                <td th:text="${record.user.name}"></td>
+                <td th:text="${record.user.surname}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
